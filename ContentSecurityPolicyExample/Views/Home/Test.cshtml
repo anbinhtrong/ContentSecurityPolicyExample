@@ -1,4 +1,4 @@
-﻿
+﻿@using NWebsec.Mvc.HttpHeaders.Csp
 @{
     ViewBag.Title = "Test";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,14 +8,23 @@
 <div id="test1"></div>
 <div id="test2"></div>
 @section scripts{
-    <script type="text/javascript">
+    <script type="text/javascript"  @Html.CspScriptNonce()>
         var testMessage = "Hello World";
         console.log(testMessage);
         $('#test1').html(testMessage);
     </script>
-    <script nonce="2726c7f26c">
+    <script  @Html.CspScriptNonce()>
         var inline = 1;
         console.log(inline);
         $('#test2').html(inline);
+    </script>
+    <script @Html.CspScriptNonce()>
+        alert("Blocked because the policy doesn't have 'unsafe-inline'.")
+    </script>
+    <script>
+        alert("Still blocked because nonce is wrong.")
+    </script>
+    <script>
+        alert("Allowed because nonce is valid.")
     </script>
 }
