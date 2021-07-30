@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NWebsec.Mvc.HttpHeaders.Csp;
 
 namespace ContentSecurityPolicyExample.Controllers
 {
@@ -29,6 +30,11 @@ namespace ContentSecurityPolicyExample.Controllers
 
         public ActionResult Test()
         {            
+            return View();
+        }
+        [CspScriptSrc(UnsafeInline = true)]
+        public ActionResult Test2()
+        {
             return View();
         }
 

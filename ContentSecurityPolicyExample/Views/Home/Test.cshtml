@@ -5,26 +5,59 @@
 }
 
 <h2>Test</h2>
-<div id="test1"></div>
+<div id="test1" style="width:100%;"></div>
 <div id="test2"></div>
+<div id="backgroundColorTest">Background color
+    <div id="styleID"></div>    
+</div>
+<div id="knockoutArea">
+    <h1>Knockout Test</h1>
+    Today's message is: <span data-bind="text: myMessage"></span>
+    <button type="button" data-bind="click: btnClick">button</button>
+</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4yO4MIx5Tos" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 @section scripts{
-    <script type="text/javascript"  @Html.CspScriptNonce()>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Scripts/knockout-secure-binding.min.js"></script>
+    <script type="text/javascript" @Html.CspScriptNonce()>
         var testMessage = "Hello World";
         console.log(testMessage);
         $('#test1').html(testMessage);
     </script>
-    <script  @Html.CspScriptNonce()>
+    <script @Html.CspScriptNonce()>
         var inline = 1;
         console.log(inline);
         $('#test2').html(inline);
+        $('#styleID').html('<style>#backgroundColorTest{ background-color : green }</style>')
     </script>
     <script @Html.CspScriptNonce()>
-        alert("Blocked because the policy doesn't have 'unsafe-inline'.")
+        console.log("Blocked because the policy doesn't have 'unsafe-inline'.");
+
+        function alertMessage() {
+            alert("Hello");
+        }
+        setTimeout(alertMessage, "5000");
     </script>
     <script>
         alert("Still blocked because nonce is wrong.")
     </script>
     <script>
         alert("Allowed because nonce is valid.")
+    </script>
+    <!--Test knockout js-->
+    <script type="text/javascript" @Html.CspScriptNonce()>
+        var viewModel = function () {
+            this.btnClick = function () {
+                alert('clicked');
+            };
+        };
+        var options = {
+            attribute: "data-bind",        // default "data-sbind"
+            globals: window,               // default {}
+            bindings: ko.bindingHandlers,  // default ko.bindingHandlers
+            noVirtualElements: false       // default true
+        };
+        ko.bindingProvider.instance = new ko.secureBindingsProvider(options);
+        ko.applyBindings(new viewModel(), document.getElementById("knockoutArea"));
     </script>
 }

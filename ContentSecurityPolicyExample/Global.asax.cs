@@ -21,21 +21,21 @@ namespace ContentSecurityPolicyExample
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
-            filters.Add(new SetNoCacheHttpHeadersAttribute());
-            filters.Add(new XRobotsTagAttribute() { NoIndex = true, NoFollow = true });
-            filters.Add(new XContentTypeOptionsAttribute());
-            filters.Add(new XDownloadOptionsAttribute());
-            filters.Add(new XFrameOptionsAttribute());
-            filters.Add(new XXssProtectionAttribute());
-            //CSP
-            filters.Add(new CspAttribute());
-            filters.Add(new CspDefaultSrcAttribute { Self = true });
-            filters.Add(new CspScriptSrcAttribute { Self = true });
-            //CSPReportOnly
-            filters.Add(new CspReportOnlyAttribute());
-            filters.Add(new CspScriptSrcReportOnlyAttribute { None = true});
-        }
+        //public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        //{
+        //    filters.Add(new SetNoCacheHttpHeadersAttribute());
+        //    filters.Add(new XRobotsTagAttribute() { NoIndex = true, NoFollow = true });
+        //    filters.Add(new XContentTypeOptionsAttribute());
+        //    filters.Add(new XDownloadOptionsAttribute());
+        //    filters.Add(new XFrameOptionsAttribute());
+        //    filters.Add(new XXssProtectionAttribute());
+        //    //CSP
+        //    filters.Add(new CspAttribute());
+        //    filters.Add(new CspDefaultSrcAttribute { Self = true });
+        //    filters.Add(new CspScriptSrcAttribute { Self = true });
+        //    //CSPReportOnly
+        //    filters.Add(new CspReportOnlyAttribute());
+        //    filters.Add(new CspScriptSrcReportOnlyAttribute { None = true});
+        //}
     }
 }
