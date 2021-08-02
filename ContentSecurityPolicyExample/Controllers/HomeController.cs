@@ -32,7 +32,7 @@ namespace ContentSecurityPolicyExample.Controllers
         {            
             return View();
         }
-        [CspScriptSrc(UnsafeInline = true)]
+        [CspFilter]
         public ActionResult Test2()
         {
             return View();
