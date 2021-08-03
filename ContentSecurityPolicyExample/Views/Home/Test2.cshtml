@@ -3,15 +3,16 @@
     ViewBag.Title = "Test2";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var price = 2;
-    var xyz = Html.CspScriptNonce().ToString();
 }
 
 <h2>Test2</h2>
-@NhatkyhoctapHelper.DisplayPrice(price, xyz)
+@NhatkyhoctapHelper.DisplayPrice(price)
 <iframe src="/Home/Test" title="Google API" style="width: 768px; height: 500px;"></iframe>
 @section scripts{
     <script @Html.CspScriptNonce() type="text/javascript">
-        console.log('Test 2');
+        var helloFunctionName = 'logInfo';
+        console.log('Test 2**********');
+        window[helloFunctionName]('window function');
     </script>
 
     <script @Html.CspScriptNonce()>

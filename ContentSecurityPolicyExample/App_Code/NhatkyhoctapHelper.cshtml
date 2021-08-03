@@ -1,18 +1,19 @@
 @using NWebsec.Mvc.HttpHeaders.Csp
-@helper DisplayPrice(Decimal price, string nonce)
+@helper DisplayPrice(Decimal price)
 {
     if (price != 0)
     {
         <span>Price: @string.Format("{0:C2}", price)</span>
-        <script @nonce type="text/javascript">
+        @*<script @nonce type="text/javascript">
             alert("Price: @string.Format("{0:C2}", price)");
         </script>
         <script @Html.CspScriptNonce() type="text/javascript">
             alert("Price: @string.Format("{0:C2}", price)");
-        </script>
+        </script>*@
     }
     else
     {
         <span>Free</span>
     }
+    <script src="~/Scripts/myscript.js"></script>
 }

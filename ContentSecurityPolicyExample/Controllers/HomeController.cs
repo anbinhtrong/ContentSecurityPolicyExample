@@ -38,6 +38,21 @@ namespace ContentSecurityPolicyExample.Controllers
             return View();
         }
 
+        public ActionResult JqueryTemplateExample()
+        {
+            return View();
+        }
+
+        public ActionResult HandleBar()
+        {
+            return View();
+        }
+
+        public ActionResult MustacheExample()
+        {
+            return View();
+        }
+
         public JsonResult Post()
         {
             return Json(new
