@@ -1,0 +1,35 @@
+﻿@using NWebsec.Mvc.HttpHeaders.Csp
+@{
+    ViewBag.Title = "JqueryTemplateExample";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>JqueryTemplateExample</h2>
+<script id="attendeesTemplate" type="text/html">
+    <li>
+        ${Name} ${Surname}
+        {{if speaker}}
+        (<font color="red">speaks</font>)
+        {{else}}
+        (attendee)
+        {{/if}}
+        {{each(i,v) phones}}
+        <br />
+        ${i}: <em>${v}</em>
+        {{/each}}
+    </li>
+</script>
+@section scripts{    
+    <script src="~/Scripts/jquery.tmpl.js"></script>
+    <script type="text/javascript" @Html.CspScriptNonce()>
+        $(function () {
+            var attendees = [
+                { Name: "Hajan", Surname: "Selmani", speaker: true, phones: [070555555, 071888999, 071222333] },
+                { Name: "Someone", Surname: "Surname", phones: [070555555, 071222333] },
+                { Name: "Third", Surname: "Thirdsurname", phones: [070555555, 071888999, 071222333] },
+            ];
+
+            $("#attendeesTemplate").tmpl(attendees).appendTo("#attendeesList");
+        });
+    </script>
+}

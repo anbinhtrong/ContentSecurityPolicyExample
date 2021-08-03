@@ -1,0 +1,27 @@
+﻿@using NWebsec.Mvc.HttpHeaders.Csp
+@{
+    ViewBag.Title = "Mustache";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mustache</h2>
+<div id="target">Loading...</div>
+<script id="template" type="x-tmpl-mustache">
+      Hello {{ name }}!
+</script>
+@section scripts{    
+    <script src="~/Scripts/mustache4.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js" integrity="sha512-CswfmQmJj8DXhm29Qc5eLk5//2EW1CaI6de+RmRhSrWrXRhkBQ3795tuwJvT6DK6EF4IVqJIRmBg8EokL6c87g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+    <script @Html.CspScriptNonce()>
+        //var Mustache = require('mustache');
+        renderHello();
+
+        // file: render.js
+
+        function renderHello() {
+            var template = document.getElementById('template').innerHTML;
+            var rendered = Mustache.render(template, { name: 'Luke' });
+            document.getElementById('target').innerHTML = rendered;
+        }
+    </script>
+}
