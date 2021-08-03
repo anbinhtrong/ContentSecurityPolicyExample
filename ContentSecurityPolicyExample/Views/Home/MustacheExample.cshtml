@@ -7,7 +7,22 @@
 <h2>Mustache</h2>
 <div id="target">Loading...</div>
 <script id="template" type="x-tmpl-mustache">
-      Hello {{ name }}!
+    Hello {{ name }}!
+    {{#attendees}}
+    <li>
+        {{Name}} {{Surname}}
+        {{#speaker}}
+        (<font color="red">speaks</font>)
+        {{/speaker}}
+        {{^speaker}}
+        (attendee)
+        {{/speaker}}
+        {{#phones}}
+        <br />
+        <em>{{.}}</em>
+        {{/phones}}
+    </li>
+    {{/attendees}}
 </script>
 @section scripts{    
     <script src="~/Scripts/mustache4.js"></script>
@@ -20,7 +35,16 @@
 
         function renderHello() {
             var template = document.getElementById('template').innerHTML;
-            var rendered = Mustache.render(template, { name: 'Luke' });
+            var attendees = [
+                { Name: "Hajan", Surname: "Selmani", speaker: true, phones: [070555555, 071888999, 071222333] },
+                { Name: "Someone", Surname: "Surname", phones: [070555555, 071222333] },
+                { Name: "Third", Surname: "Thirdsurname", phones: [070555555, 071888999, 071222333] },
+            ];
+            var value = {
+                name: 'Luke',
+                attendees: attendees
+            }
+            var rendered = Mustache.render(template, value);
             document.getElementById('target').innerHTML = rendered;
         }
     </script>
